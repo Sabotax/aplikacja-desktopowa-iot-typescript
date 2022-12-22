@@ -1,55 +1,23 @@
 import { Component } from "@angular/core";
 import { invoke } from "@tauri-apps/api/tauri";
 import { PanelComponent } from "./panel/panel.component";
+import { State } from './enums';
 
 @Component({
   selector: "app-root",
   imports: [PanelComponent],
-  template: `
-    <div class="container">
-      <h1>Welcome to Tauri + Angular!</h1>
-
-      <div class="row">
-        <a href="https://tauri.app" target="_blank">
-          <img src="/assets/tauri.svg" class="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://angular.io" target="_blank">
-          <img
-            src="/assets/angular.svg"
-            class="logo angular"
-            alt="Angular logo"
-          />
-        </a>
-      </div>
-
-      <p>Click on the logos to learn more about the frameworks</p>
-      <app-panel [active]=true></app-panel>
-
-      <div class="row">
-        <div>
-          <input #greetInput id="greet-input" placeholder="Enter a name..." />
-          <button type="button" (click)="greet(greetInput.value)">Greet</button>
-        </div>
-      </div>
-
-      <p>{{ greetingMessage }}</p>
-    </div>
-  `,
-  styles: [
-    `
-      .logo.angular:hover {
-        filter: drop-shadow(0 0 2em #e32727);
-      }
-    `,
-  ],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
   standalone: true,
 })
 export class AppComponent {
-  greetingMessage = "";
+  outcomes = State;
+  current_state: State = State.Default;
 
-  greet(name: string): void {
-    invoke<string>("greet", { name }).then((text) => {
-      this.greetingMessage = text;
-    });
+  constructor() {}
+  
+  change_state(state: State) {
+    if(state == this.current_state) this.current_state=State.Default
+    else this.current_state=state
   }
 }

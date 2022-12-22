@@ -1,5 +1,6 @@
-<div 
+<div
     id={{id}}
-    class="panel">
-    <div *ngIf="active">ABC</div>
+    [ngClass]="{'panel': true ,'panelActive': active}"
+    (click)="activate_state()">
+    {{label}}
 </div>

@@ -1,19 +1,34 @@
-import { NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { State } from '../enums';
 
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.css'],
   standalone: true,
-  imports: [NgIf]
+  imports: [NgIf,NgClass]
 })
 export class PanelComponent  {
     @Input() id!: String;
     @Input() label!: String;
     @Input() active!: Boolean;
+    @Input() state!: State;
+    @Input() parent_state!: State;
+    @Output() myEvent = new EventEmitter<State>();
+
   constructor(
   ) { }
 
+  activate_state() {
+    if(this.state == this.parent_state) {
+      this.active = false;
+      this.myEvent.emit(this.state)
+    }
+    else {
+      this.active = true;
+      this.myEvent.emit(this.state)
+    }
+  }
 
 }
