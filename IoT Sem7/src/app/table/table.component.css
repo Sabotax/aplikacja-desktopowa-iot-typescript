@@ -1,5 +1,5 @@
 #table_container {
-    overflow:scroll;
-    height:auto;
+    overflow-y:scroll;
+    height:100%;
     width:auto;
 }
