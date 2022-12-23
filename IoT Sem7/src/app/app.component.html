@@ -1,39 +1,42 @@
 <div class="container">
     <div id="mainLeft">
         <app-panel 
-        [id]="'Dane_panel'"
-        [label]="'Dane'"
-        [active]="false"
-        [state]="outcomes.Dane"
-        [parent_state]="current_state"
-        (myEvent)="change_state($event)">
+            [id]="'Dane_panel'"
+            [label]="'Dane'"
+            [active]="current_state==state.Dane"
+            [state]="state.Dane"
+            [parent_state]="current_state"
+            (myEvent)="change_state($event)">
         </app-panel>
         <app-panel 
         [id]="'Led_panel'"
         [label]="'Led'"
-        [active]="false"
-        [state]="outcomes.Led"
+        [active]="current_state==state.Led"
+        [state]="state.Led"
         [parent_state]="current_state"
         (myEvent)="change_state($event)">
         </app-panel>
         <app-panel 
-        [id]="'Table_panel'"
-        [label]="'Table'"
-        [active]="false"
-        [state]="outcomes.Table"
-        [parent_state]="current_state"
-        (myEvent)="change_state($event)">
+            [id]="'Table_panel'"
+            [label]="'Table'"
+            [active]="current_state==state.Table"
+            [state]="state.Table"
+            [parent_state]="current_state"
+            (myEvent)="change_state($event)">
         </app-panel>
         <app-panel 
-        [id]="'Settings_panel'"
-        [label]="'Settings'"
-        [active]="false"
-        [state]="outcomes.Settings"
-        [parent_state]="current_state"
-        (myEvent)="change_state($event)">
+            [id]="'Settings_panel'"
+            [label]="'Settings'"
+            [active]="current_state==state.Settings"
+            [state]="state.Settings"
+            [parent_state]="current_state"
+            (myEvent)="change_state($event)">
         </app-panel>
     </div>
     <div id="mainRight">
-        {{current_state}}
+        <app-dane *ngIf="current_state==state.Dane"></app-dane>
+        <app-led *ngIf="current_state==state.Led"></app-led>
+        <app-table *ngIf="current_state==state.Table"></app-table>
+        <app-settings *ngIf="current_state==state.Settings"></app-settings>
     </div>
   </div>

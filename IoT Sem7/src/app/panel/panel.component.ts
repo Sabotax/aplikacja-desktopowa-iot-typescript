@@ -22,11 +22,9 @@ export class PanelComponent  {
 
   activate_state() {
     if(this.state == this.parent_state) {
-      this.active = false;
       this.myEvent.emit(this.state)
     }
     else {
-      this.active = true;
       this.myEvent.emit(this.state)
     }
   }
