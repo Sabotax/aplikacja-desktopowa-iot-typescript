@@ -18,11 +18,16 @@ import { NgIf } from "@angular/common";
 export class AppComponent {
   state = State;
   current_state: State = State.Default;
+  currentIP: String = "http://localhost:80";
 
   constructor() {}
   
   change_state(state: State) {
     if(state == this.current_state) this.current_state=State.Default
     else this.current_state=state
+  }
+
+  setIp(IP: String) {
+    this.currentIP = IP;
   }
 }

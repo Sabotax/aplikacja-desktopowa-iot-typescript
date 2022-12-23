@@ -37,6 +37,9 @@
         <app-dane *ngIf="current_state==state.Dane"></app-dane>
         <app-led *ngIf="current_state==state.Led"></app-led>
         <app-table *ngIf="current_state==state.Table"></app-table>
-        <app-settings *ngIf="current_state==state.Settings"></app-settings>
+        <app-settings 
+        *ngIf="current_state==state.Settings"
+        (eventChangeIP)="setIp($event)">
+    </app-settings>
     </div>
   </div>
