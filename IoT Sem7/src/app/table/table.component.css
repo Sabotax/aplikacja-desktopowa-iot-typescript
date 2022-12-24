@@ -3,3 +3,17 @@
     height:100%;
     width:auto;
 }
+td {
+    border: solid black 1px;
+    border-right-width: 0px;
+    width: 100px;
+}
+.last_td {
+    border: solid black 1px;
+}
+.firstRow {
+    border-bottom-width: 3px;
+    border-style: solid;
+    border-color: black;
+    background-color: rgb(88, 83, 83);
+}
