@@ -1,1 +1,26 @@
-<p>led works!</p>
+<div id="led_container">
+    <div id="opcje1">
+        <P>Ustaw kolor: <input type="color"></P>
+        <P id="switch_text">
+            <input type="button" id="btn_set_all" value="Ustaw wszystkie">
+            Tryb ustawiania
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            Tryb czyszczenia
+            <input type="button" id="btn_clear_all" value="Wyczysc wszystkie">
+        </P>
+        <P></P>
+        <P></P>
+    </div>
+    <div id="grid_container">
+        <table id="led_grid">
+            <tr *ngFor="let i of loop07">
+                <td *ngFor="let j of loop07">
+                    <div id="{{ 'led'+i+j }}" class="led_panel"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

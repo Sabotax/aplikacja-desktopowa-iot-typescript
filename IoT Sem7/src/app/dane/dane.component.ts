@@ -21,7 +21,7 @@ export class DaneComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.intervalId = setInterval(() => {
       this.fetchData();
-    }, 500);
+    }, 100);
 
     this.createChart()
   }
@@ -63,7 +63,7 @@ export class DaneComponent implements OnInit, OnDestroy {
 
     this.data1.unshift(fetched);
     this.time1.unshift(this.getNow())
-    if(this.data1.length>20) {
+    if(this.data1.length>50) {
       this.data1.pop()
       this.time1.pop()
     }
