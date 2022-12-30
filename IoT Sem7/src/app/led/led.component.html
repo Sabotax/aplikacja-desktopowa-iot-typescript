@@ -2,14 +2,14 @@
     <div id="opcje1">
         <P>Ustaw kolor: <input type="color"></P>
         <P id="switch_text">
-            <input type="button" id="btn_set_all" value="Ustaw wszystkie">
+            <input type="button" id="btn_set_all" value="Ustaw wszystkie" (click)="set_all()">
             Tryb ustawiania
             <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" (click)="switch_mode()">
                 <span class="slider round"></span>
             </label>
             Tryb czyszczenia
-            <input type="button" id="btn_clear_all" value="Wyczysc wszystkie">
+            <input type="button" id="btn_clear_all" value="Wyczysc wszystkie" (click)="clear_all()">
         </P>
         <P></P>
         <P></P>
@@ -18,7 +18,7 @@
         <table id="led_grid">
             <tr *ngFor="let i of loop07">
                 <td *ngFor="let j of loop07">
-                    <div id="{{ 'led'+i+j }}" class="led_panel"></div>
+                    <div id="{{ 'led'+i+j }}" class="led_panel" (click)="set_single(i,j)"></div>
                 </td>
             </tr>
         </table>
