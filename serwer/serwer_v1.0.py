@@ -36,7 +36,7 @@ def setSingleLedPanel():
 #{
 #"color": FFFFFF
 #}
-@app.route('/setSinglePixel', methods=['POST'])
+@app.route('/setAllPixels', methods=['POST'])
 def setSingleLedPanel():
     content = request.get_json(silent=True)
     sense.set_pixels(
