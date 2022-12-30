@@ -1,10 +1,15 @@
 import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { HttpClient,HttpResponse } from '@angular/common/http';
+import { interval, take, lastValueFrom, Observable } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
+import { getBasicDataResponse, Result } from '../classes';
 
 @Component({
   selector: 'app-dane',
   templateUrl: './dane.component.html',
   styleUrls: ['./dane.component.css'],
+  imports: [HttpClientModule],
   standalone: true
 })
 export class DaneComponent implements OnInit, OnDestroy {
@@ -12,11 +17,13 @@ export class DaneComponent implements OnInit, OnDestroy {
 
   intervalId: any;
   data1: Array<Number> = []
+  data2: Array<Number> = []
+  data3: Array<Number> = []
   time1: Array<String> = []
 
   @Input() IP!: String
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.intervalId = setInterval(() => {
@@ -39,16 +46,20 @@ export class DaneComponent implements OnInit, OnDestroy {
         labels: this.time1, 
 	       datasets: [
           {
-            label: "Sales",
+            label: "Temperatura [C]",
             data: this.data1,
+            backgroundColor: 'red'
+          },
+          {
+            label: "Pressure [bar]",
+            data: this.data2,
             backgroundColor: 'blue'
           },
-          // {
-          //   label: "Profit",
-          //   data: ['542', '542', '536', '327', '17',
-					// 				 '0.00', '538', '541'],
-          //   backgroundColor: 'limegreen'
-          // }  
+          {
+            label: "Humidity [%]",
+            data: this.data3,
+            backgroundColor: 'limegreen'
+          }  
         ]
       },
       options: {
@@ -58,17 +69,27 @@ export class DaneComponent implements OnInit, OnDestroy {
     });
   }
 
-  fetchData() {
-    let fetched = this.mockRandomInt();
-
-    this.data1.unshift(fetched);
-    this.time1.unshift(this.getNow())
-    if(this.data1.length>50) {
-      this.data1.pop()
-      this.time1.pop()
+  async fetchData() {
+    //let fetched = this.mockRandomInt();
+    let fetched = await this.makePostRequest()
+    console.log(fetched)
+    if(fetched.result == "OK") {
+      let obiekt_input = fetched.data
+      this.data1.unshift(obiekt_input.temperatura);
+      this.data2.unshift(obiekt_input.pressure);
+      this.data3.unshift(obiekt_input.humidity);
+      this.time1.unshift(this.getNow())
+      if(this.data1.length>50) {
+        this.data1.pop()
+        this.time1.pop()
+      }
+  
+      this.chart.update();
     }
-
-    this.chart.update();
+    else {
+      console.log("result err")
+    }
+    
   }
 
   mockRandomInt() {
@@ -84,5 +105,20 @@ export class DaneComponent implements OnInit, OnDestroy {
     let second = date.getSeconds();
 
     return `${hour}:${minute}:${second}`
+  }
+
+  async makePostRequest(): Promise<Result<getBasicDataResponse>> {
+    const url = 'https://32ae4481-ebc0-4c6a-b976-5870907b8d40.mock.pstmn.io/getBasicData';
+    let data = null
+    try {
+      const response = await this.http.post(url, data).toPromise();
+      //console.log(response)
+      return new Result(response)
+      // handle the response
+    } catch (error) {
+      // handle the error
+      //console.log(error)
+      return new Result(error)
+    }
   }
 }

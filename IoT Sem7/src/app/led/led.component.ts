@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFor,NgClass } from '@angular/common';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 @Component({
   selector: 'app-led',
   templateUrl: './led.component.html',
