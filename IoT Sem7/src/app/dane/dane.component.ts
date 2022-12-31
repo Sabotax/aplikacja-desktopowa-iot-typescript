@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { HttpClient,HttpResponse } from '@angular/common/http';
-import { interval, take, lastValueFrom, Observable } from 'rxjs';
+import { HttpClient, } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { getBasicDataResponse, Result } from '../classes';
 
