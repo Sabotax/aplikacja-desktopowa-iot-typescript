@@ -2,11 +2,17 @@
     <table>
         <tr>
             <td [ngClass]="{'row_timestamp': true,'last_td': true, 'firstRow': true}">Czas</td>
+            <td [ngClass]="{'row_temperature': true,'last_td': true, 'firstRow': true}">Temperatura</td>
             <td [ngClass]="{'row_humidity': true,'last_td': true, 'firstRow': true}">Wilgotność</td>
+            <td [ngClass]="{'row_pressure': true,'last_td': true, 'firstRow': true}">Ciśnienie</td>
+            <td [ngClass]="{'row_orient': true,'last_td': true, 'firstRow': true}">Orientacja</td>
         </tr>
         <tr *ngFor="let row of rows">
-            <td class="row_timestamp">{{row.time}}</td>
-            <td [ngClass]="{'row_humidity': true,'last_td': true}">{{row.humidity}}</td>
+            <td [ngClass]="{'row_time': true,'last_td': false}">{{row.time}}</td>
+            <td [ngClass]="{'row_temperature': true,'last_td': false}">{{row.temperature}}</td>
+            <td [ngClass]="{'row_humidity': true,'last_td': false}">{{row.humidity}}</td>
+            <td [ngClass]="{'row_pressure': true,'last_td': false}">{{row.pressure}}</td>
+            <td [ngClass]="{'row_orient': true,'last_td': true}">{{row.orient}}</td>
         </tr>
     </table>
 </div>

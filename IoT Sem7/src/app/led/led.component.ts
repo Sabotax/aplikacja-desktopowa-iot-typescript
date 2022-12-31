@@ -1,10 +1,10 @@
-import { Component, OnInit,AfterViewInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit, Input } from '@angular/core';
 import { NgFor,NgClass } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient, } from '@angular/common/http';
 import { getPixelsResponse,Result } from '../classes';
-@Injectable()
+
 @Component({
   selector: 'app-led',
   templateUrl: './led.component.html',
@@ -16,6 +16,7 @@ export class LedComponent implements OnInit {
   loop07: Array<Number> = [0,1,2,3,4,5,6,7]
   current_mode: Boolean = false;
   current_color: String = "FF0000";
+  @Input() IP!: String
   
   led_grid: Array<Array<HTMLElement>> = [[],[],[],[],[],[],[],[]]
 
@@ -43,7 +44,7 @@ export class LedComponent implements OnInit {
   }
 
   set_all(color: String) {
-      const url = 'https://32ae4481-ebc0-4c6a-b976-5870907b8d40.mock.pstmn.io/setAllPixels';
+      const url = `${this.IP}/setAllPixels`;
       let data = {
         color: color
       }
@@ -64,7 +65,7 @@ export class LedComponent implements OnInit {
   }
 
   clear_all() {
-    const url = 'https://32ae4481-ebc0-4c6a-b976-5870907b8d40.mock.pstmn.io/setAllPixels';
+    const url = `${this.IP}/setAllPixels`;
     let data = {
       color: "FFFFFF"
     }
@@ -85,7 +86,7 @@ export class LedComponent implements OnInit {
 
   set_color(x: Number, y: Number, color: String) {
     if(!this.current_mode) {
-      const url = 'https://32ae4481-ebc0-4c6a-b976-5870907b8d40.mock.pstmn.io/setSinglePixel';
+      const url = `${this.IP}/setSinglePixel`;
       let data = {
         x: x,
         y: y,
@@ -102,7 +103,7 @@ export class LedComponent implements OnInit {
       this.led_grid[x as number][y as number].setAttribute("style",`background-color: #${color}`)
     }
     else {
-      const url = 'https://32ae4481-ebc0-4c6a-b976-5870907b8d40.mock.pstmn.io/setSinglePixel';
+      const url = `${this.IP}/setSinglePixel`;
       let data = {
         x: x,
         y: y,
@@ -126,7 +127,7 @@ export class LedComponent implements OnInit {
   }
 
   async get_pixels() {
-    const url = 'https://32ae4481-ebc0-4c6a-b976-5870907b8d40.mock.pstmn.io/getPixels';
+    const url = `${this.IP}/getPixels`;
     let data = null
     let result_grid: Result<Array<Array<Number>>>
     try {

@@ -107,7 +107,7 @@ export class DaneComponent implements OnInit, OnDestroy {
   }
 
   async makePostRequest(): Promise<Result<getBasicDataResponse>> {
-    const url = 'https://32ae4481-ebc0-4c6a-b976-5870907b8d40.mock.pstmn.io/getBasicData';
+    const url = `${this.IP}/getBasicData`;
     let data = null
     try {
       const response = await this.http.post(url, data).toPromise();

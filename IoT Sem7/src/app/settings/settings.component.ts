@@ -16,10 +16,10 @@ export class SettingsComponent implements OnInit {
   }
 
   emitChangeIP() {
+    console.log("event")
     let IPInput = <HTMLInputElement>document.getElementById('IPInput');
     this.IPValue = IPInput.value;
     this.eventChangeIP.emit(this.IPValue)
   }
-  // TODO 1. zamiana ze statycznego ip  w requestach na ten 2. table
 
 }

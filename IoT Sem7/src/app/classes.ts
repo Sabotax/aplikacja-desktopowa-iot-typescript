@@ -1,23 +1,32 @@
 import { isObject } from "chart.js/dist/helpers/helpers.core"
+import { HttpErrorResponse } from '@angular/common/http';
 
 export class TableRow {
     time: string
     humidity: Number
+    temperature: Number
+    pressure: Number
+    orient: Orient
     
     constructor(
         time: string,
-        humidity: Number
+        humidity: Number,
+        temperature: Number,
+        pressure: Number,
+        orient: Orient
     ) {
         this.time = time
         this.humidity = humidity
+        this.temperature = temperature
+        this.pressure = pressure
+        this.orient = orient
     }
 }
 export class Result<T> {
     result: String = "Err"
     data!: T
-    constructor(input: Object | undefined | unknown) {
-        console.log("input123",typeof(input) == "object")
-        if(typeof(input) == "object") {
+    constructor(input: Object | undefined | unknown | HttpErrorResponse) {
+        if(typeof(input) == "object" /*&& typeof(input) != "HttpErrorResponse"*/) {
             this.result = "OK"
             this.data = input as T
         }

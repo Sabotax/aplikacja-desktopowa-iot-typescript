@@ -18,7 +18,7 @@ import { NgIf } from "@angular/common";
 export class AppComponent {
   state = State;
   current_state: State = State.Default;
-  currentIP: String = "http://localhost:80";
+  currentIP: String = "https://32ae4481-ebc0-4c6a-b976-5870907b8d40.mock.pstmn.io";
 
   constructor() {}
   
@@ -29,5 +29,6 @@ export class AppComponent {
 
   setIp(IP: String) {
     this.currentIP = IP;
+    console.log("currentIP", this.currentIP)
   }
 }
