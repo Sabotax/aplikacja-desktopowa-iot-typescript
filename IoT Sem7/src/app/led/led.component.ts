@@ -33,6 +33,7 @@ export class LedComponent implements OnInit {
       }
     }
     this.get_pixels();
+    this.current_color = ((document.getElementById("input_color") as HTMLInputElement).value).replace("#","")
   }
 
   change_color(event: Event) {
@@ -77,13 +78,13 @@ export class LedComponent implements OnInit {
     }
     for(let i =0;i<8;i++) {
       for(let j = 0 ; j<8;j++){
-        this.led_grid[i][j].setAttribute("style",`background-color: #FFFFFF`)
+        this.led_grid[i][j].setAttribute("style",`background-color: #000000`)
       }
     }
   }
 
   set_color(x: Number, y: Number, color: String) {
-    if(this.current_mode) {
+    if(!this.current_mode) {
       const url = 'https://32ae4481-ebc0-4c6a-b976-5870907b8d40.mock.pstmn.io/setSinglePixel';
       let data = {
         x: x,
@@ -115,7 +116,7 @@ export class LedComponent implements OnInit {
         // handle the error
         //console.log(error)
       }
-      this.led_grid[x as number][y as number].setAttribute("style",`background-color: #FFFFFF`)
+      this.led_grid[x as number][y as number].setAttribute("style",`background-color: #000000`)
     }
     
   }

@@ -20,6 +20,6 @@ export class SettingsComponent implements OnInit {
     this.IPValue = IPInput.value;
     this.eventChangeIP.emit(this.IPValue)
   }
-  // TODO zamiana ze statycznego w requestach na ten
+  // TODO 1. zamiana ze statycznego ip  w requestach na ten 2. table
 
 }

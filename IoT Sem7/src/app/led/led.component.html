@@ -1,6 +1,6 @@
 <div id="led_container">
     <div id="opcje1">
-        <P>Ustaw kolor: <input type="color" (change)="change_color($event)"></P>
+        <P>Ustaw kolor: <input id="input_color" type="color" (change)="change_color($event)"></P>
         <P id="switch_text">
             <input type="button" id="btn_set_all" value="Ustaw wszystkie" (click)="set_all(this.current_color)">
             Tryb ustawiania
