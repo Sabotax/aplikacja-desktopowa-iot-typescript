@@ -17,3 +17,6 @@ td {
     border-color: black;
     background-color: rgb(88, 83, 83);
 }
+.row_orient {
+    width: 200px;
+}

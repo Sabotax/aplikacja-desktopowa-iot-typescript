@@ -7,7 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   standalone: true
 })
 export class SettingsComponent implements OnInit {
-  IPValue: String = "http://localhost:80";
+  IPValue: String = "http://localhost";
   @Output() eventChangeIP = new EventEmitter<String>();
 
   constructor() { }

@@ -12,7 +12,7 @@
             <td [ngClass]="{'row_temperature': true,'last_td': false}">{{row.temperature}}</td>
             <td [ngClass]="{'row_humidity': true,'last_td': false}">{{row.humidity}}</td>
             <td [ngClass]="{'row_pressure': true,'last_td': false}">{{row.pressure}}</td>
-            <td [ngClass]="{'row_orient': true,'last_td': true}">{{row.orient}}</td>
+            <td [ngClass]="{'row_orient': true,'last_td': true}">R:{{row.orient.roll}} , Y:{{row.orient.yaw}} , P:{{row.orient.pitch}}</td>
         </tr>
     </table>
 </div>
