@@ -2,8 +2,10 @@ from flask import Flask, request, jsonify,make_response
 from sense_hat import SenseHat
 import json
 from random import randint
+from flask_cors import CORS
 
 app=Flask(__name__)
+CORS(app)
 sense = SenseHat()
 
 @app.route('/getPixels', methods=['POST'])
@@ -16,9 +18,7 @@ def getBasicData():
     p = sense.get_pressure()
     t = sense.get_temperature()
     resp = make_response( json.dumps({'temperatura': t, 'pressure': p, 'humidity': h}))
-    resp.headers['Access-Control-Allow-Origin'] = '*'
-    resp.headers["Access-Control-Allow-Headers"] = "Content-Type, allow-control-access-origin";
-    resp.headers["Content-Type"] = "application/json; charset=utf-8";
+
     return resp
 
 
@@ -31,10 +31,15 @@ def getBasicData():
 @app.route('/setSinglePixel', methods=['POST'])
 def setSingleLedPanel():
     content = request.get_json(silent=True)
+    print("single, dostałem")
+    print(content)
     sense.set_pixel(content["x"], content["y"], 
                     int(content["color"][0:2],16),
                     int(content["color"][2:4],16),
                     int(content["color"][4:6],16))
+    resp = make_response()
+
+    return resp
 
 #oczekuje body w postaci {
 #{
@@ -43,10 +48,16 @@ def setSingleLedPanel():
 @app.route('/setAllPixels', methods=['POST'])
 def setAllPixels():
     content = request.get_json(silent=True)
+    print("all, dostałem")
+    print(content)
     sense.set_pixels(
                     int(content["color"][0:2],16),
                     int(content["color"][2:4],16),
                     int(content["color"][4:6],16))
+    
+    resp = make_response()
+
+    return resp
 
 @app.route('/getAdvancedData', methods=['POST','GET'])
 def getAdvancedData():
@@ -55,14 +66,11 @@ def getAdvancedData():
     t = sense.get_temperature()
     
     orient = sense.get_orientation_degrees()
-    sense.stick.wait_for_event()
-    joy = sense.stick.get_events()
+    #sense.stick.wait_for_event()
+    #joy = sense.stick.get_events()
     
-    resp = make_response(json.dumps({'temperatura': t, 'pressure': p, 'humidity': h, 'orient': orient, 'joystick': joy}))
-    resp.headers['Access-Control-Allow-Origin'] = '*'
-    resp.headers["Access-Control-Allow-Headers"] = "Content-Type, allow-control-access-origin";
-    resp.headers["Content-Type"] = "application/json; charset=utf-8";
-    
+    resp = make_response(json.dumps({'temperatura': t, 'pressure': p, 'humidity': h, 'orient': orient, 'joystick': []}))
+
     return resp
 
     
