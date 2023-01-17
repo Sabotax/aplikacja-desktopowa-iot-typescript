@@ -34,7 +34,7 @@ export class TableComponent implements OnInit {
     console.log(response)
     if(response.result == "OK") {
       this.rows.unshift(
-        new TableRow(this.getNow(), response.data.humidity,response.data.temperatura,response.data.pressure,response.data.orient)
+        new TableRow(this.getNow(), response.data.humidity,response.data.temperatura,response.data.pressure,response.data.orient,response.data.joystick)
       )
     }
     

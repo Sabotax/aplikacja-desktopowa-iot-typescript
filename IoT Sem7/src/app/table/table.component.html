@@ -1,18 +1,20 @@
 <div id="table_container">
     <table>
         <tr>
-            <td [ngClass]="{'row_timestamp': true,'last_td': true, 'firstRow': true}">Czas</td>
-            <td [ngClass]="{'row_temperature': true,'last_td': true, 'firstRow': true}">Temperatura</td>
-            <td [ngClass]="{'row_humidity': true,'last_td': true, 'firstRow': true}">Wilgotność</td>
-            <td [ngClass]="{'row_pressure': true,'last_td': true, 'firstRow': true}">Ciśnienie</td>
-            <td [ngClass]="{'row_orient': true,'last_td': true, 'firstRow': true}">Orientacja</td>
+            <td [ngClass]="{'row_timestamp': true,'last_td': false, 'firstRow': true}">Czas</td>
+            <td [ngClass]="{'row_temperature': true,'last_td': false, 'firstRow': true}">Temperatura</td>
+            <td [ngClass]="{'row_humidity': true,'last_td': false, 'firstRow': true}">Wilgotność</td>
+            <td [ngClass]="{'row_pressure': true,'last_td': false, 'firstRow': true}">Ciśnienie</td>
+            <td [ngClass]="{'row_orient': true,'last_td': false, 'firstRow': true}">Orientacja</td>
+            <td [ngClass]="{'row_joystick': true,'last_td': true, 'firstRow': true}">Joystick</td>
         </tr>
         <tr *ngFor="let row of rows">
             <td [ngClass]="{'row_time': true,'last_td': false}">{{row.time}}</td>
             <td [ngClass]="{'row_temperature': true,'last_td': false}">{{row.temperature}}</td>
             <td [ngClass]="{'row_humidity': true,'last_td': false}">{{row.humidity}}</td>
             <td [ngClass]="{'row_pressure': true,'last_td': false}">{{row.pressure}}</td>
-            <td [ngClass]="{'row_orient': true,'last_td': true}">R:{{row.orient.roll}} , Y:{{row.orient.yaw}} , P:{{row.orient.pitch}}</td>
+            <td [ngClass]="{'row_orient': true,'last_td': false}">R:{{row.orient.roll}} , Y:{{row.orient.yaw}} , P:{{row.orient.pitch}}</td>
+            <td [ngClass]="{'row_joystick': true,'last_td': true}">{{row.joystick}}</td>
         </tr>
     </table>
 </div>

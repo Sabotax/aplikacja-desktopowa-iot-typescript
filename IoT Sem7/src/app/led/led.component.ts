@@ -45,8 +45,11 @@ export class LedComponent implements OnInit {
 
   set_all(color: String) {
       const url = `${this.IP}/setAllPixels`;
-      let data = {
-        color: color
+      let data : Array<Array<Number>> = []
+      for(let i =0;i<8;i++) {
+        for(let j = 0 ; j<8;j++){
+          data.push([parseInt(color.slice(0,2),16),parseInt(color.slice(2,4),16),parseInt(color.slice(4,6),16)])
+        }
       }
       try {
         this.http.post(url, data).toPromise();
@@ -66,9 +69,12 @@ export class LedComponent implements OnInit {
 
   clear_all() {
     const url = `${this.IP}/setAllPixels`;
-    let data = {
-      color: "FFFFFF"
-    }
+    let data : Array<Array<Number>> = []
+      for(let i =0;i<8;i++) {
+        for(let j = 0 ; j<8;j++){
+          data.push([0,0,0])
+        }
+      }
     try {
       this.http.post(url, data).toPromise();
       //console.log(response)
@@ -90,7 +96,9 @@ export class LedComponent implements OnInit {
       let data = {
         x: x,
         y: y,
-        color: color
+        R: parseInt(color.slice(0,2),16),
+        G: parseInt(color.slice(2,4),16),
+        B: parseInt(color.slice(4,6),16)
       }
       try {
         this.http.post(url, data).toPromise();
@@ -107,7 +115,9 @@ export class LedComponent implements OnInit {
       let data = {
         x: x,
         y: y,
-        color: "FFFFFF"
+        R: 0,
+        G: 0,
+        B: 0
       }
       try {
         this.http.post(url, data).toPromise();
@@ -139,6 +149,7 @@ export class LedComponent implements OnInit {
       // handle the error
       //console.log(error)
       result_grid= new Result(error)
+      result_grid.result="Err"
     }
 
     console.log("result_grid",result_grid)

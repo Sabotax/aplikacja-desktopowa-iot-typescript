@@ -23,38 +23,26 @@ def getBasicData():
     return resp
 
 
-#oczekuje body w postaci {
-#{
-#"x": 0,
-#"y": 0,
-#"color": FFFFFF
-#}
 @app.route('/setSinglePixel', methods=['POST'])
 def setSingleLedPanel():
     content = request.get_json(silent=True)
     print("single, dostałem")
     print(content)
     sense.set_pixel(content["x"], content["y"], 
-                    int(content["color"][0:2],16),
-                    int(content["color"][2:4],16),
-                    int(content["color"][4:6],16))
+                    int(content["R"]),
+                    int(content["G"]),
+                    int(content["B"]))
     resp = make_response()
 
     return resp
 
-#oczekuje body w postaci {
-#{
-#"color": FFFFFF
-#}
+
 @app.route('/setAllPixels', methods=['POST'])
 def setAllPixels():
     content = request.get_json(silent=True)
     print("all, dostałem")
     print(content)
-    sense.set_pixels(
-                    int(content["color"][0:2],16),
-                    int(content["color"][2:4],16),
-                    int(content["color"][4:6],16))
+    sense.set_pixels(content)
     
     resp = make_response()
 
@@ -68,12 +56,12 @@ def getAdvancedData():
     
     orient = sense.get_orientation_degrees()
     #sense.stick.wait_for_event()
-    #joy = sense.stick.get_events()
+    joy = sense.stick.get_events()
     
-    resp = make_response(json.dumps({'temperatura': t, 'pressure': p, 'humidity': h, 'orient': orient, 'joystick': []}))
+    resp = make_response(json.dumps({'temperatura': t, 'pressure': p, 'humidity': h, 'orient': orient, 'joystick': joy}))
 
     return resp
 
     
 if __name__ == "__main__":
-    app.run(port=80,host="0.0.0.0")
+    app.run(port=8080,host="0.0.0.0")

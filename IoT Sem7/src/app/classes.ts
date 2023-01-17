@@ -7,19 +7,22 @@ export class TableRow {
     temperature: Number
     pressure: Number
     orient: Orient
+    joystick: Array<any>
     
     constructor(
         time: string,
         humidity: Number,
         temperature: Number,
         pressure: Number,
-        orient: Orient
+        orient: Orient,
+        joystick: Array<any>
     ) {
         this.time = time
         this.humidity = humidity
         this.temperature = temperature
         this.pressure = pressure
         this.orient = orient
+        this.joystick = joystick
     }
 }
 export class Result<T> {
