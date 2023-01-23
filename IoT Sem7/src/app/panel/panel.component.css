@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #28a745;
   }
   
   .panelInactive {

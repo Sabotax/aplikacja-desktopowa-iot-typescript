@@ -5,7 +5,7 @@
 
 body {
   padding: 1px;
-  background: #2d2d2d;
+  background: #343a40;
   color: white;
 }
 
@@ -28,5 +28,6 @@ body {
   height: var(--window_height);
   width: 950px;
   padding: 10px;
+  background-color: ;
 }
 
