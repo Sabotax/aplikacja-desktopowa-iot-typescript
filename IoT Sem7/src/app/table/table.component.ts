@@ -21,7 +21,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     this.intervalId = setInterval(() => {
       this.fetchData();
-    }, 1000);
+    }, 100);
 
   }
 
